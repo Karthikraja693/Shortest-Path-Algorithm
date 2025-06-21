@@ -13,8 +13,25 @@ def shortest_path(graph, start,target = ''):
     while unvisited:
         current = min(unvisited, key=distances.get)
         for node, distance in graph[current]:
+
+# 2. if distance + distances[current] < distances[node]:
+# What is distance + distances[current]?
+# This is calculating a new possible path to reach the neighbor node.
+# distance: cost to reach the neighbor from current
+# distances[current]: cost to reach current from the start
+# So distance + distances[current] = total cost from start → current → neighbor
+# What does the condition check?
+# “Is this new path to the neighbor shorter than what I currently know?”
+
+If yes, then we update that shorter path.
             if distance + distances[current] < distances[node]:
                 distances[node] = distance + distances[current]
+
+#if paths['C'] and paths['C'][-1] == 'C':   # True, because paths['C'] = ['A', 'D', 'C']
+#paths['C'] = paths['B'][:]  # paths['C'] is now ['A', 'B']
+#paths['C'].append('C')      # paths['C'] becomes ['A', 'B', 'C']
+#Old path ['A', 'D', 'C'] is replaced with the new shorter path ['A', 'B', 'C'].
+
                 if paths[node] and paths[node][-1] == node:
                     paths[node] = paths[current][:]
                 else:
